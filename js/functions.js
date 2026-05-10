@@ -1,9 +1,9 @@
-const checkStringLength = function(str) {
-  const maxLength = 40;
-  return str.length <= maxLength;
+const checkStringLength = function(str, maxLength) {
+  const isValid = str.length <= maxLength;
+  return isValid;
 };
 
-checkStringLength('Попа');
+checkStringLength('Попа', 20);
 
 const isPalindrome = function(str) {
   const normalized = str.toLowerCase();

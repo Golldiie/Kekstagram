@@ -24,7 +24,7 @@ const checkPalindrome = function(str) {
 
 checkPalindrome('А роза упала на лапу Азора');
 
-const giveNumber = function(str) {
+const giveNumfromStr = function(str) {
   if (typeof str !== 'string') {
     str = String(str);
   }
@@ -43,4 +43,19 @@ const giveNumber = function(str) {
   return Number(result);
 };
 
-giveNumber('33 cows');
+giveNumfromStr('33 cows');
+
+const isValidMeeting = function(workStart, workEnd, meetTime, meetDuration) {
+  const timeToMinutes = (timeStr) => {
+    const [hours, minutes] = timeStr.split(':');
+    return Number(hours) * 60 + Number(minutes);
+  };
+  const startWorkMinutes = timeToMinutes(workStart);
+  const endWorkMinutes = timeToMinutes(workEnd);
+  const meetTimeMinutes = timeToMinutes(meetTime);
+  const endMeetMinutes = meetTimeMinutes + meetDuration;
+
+  return endMeetMinutes >= startWorkMinutes && endMeetMinutes <= endWorkMinutes;
+};
+
+isValidMeeting('08:50', '14:00', '14:00', 90);

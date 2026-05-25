@@ -31,6 +31,33 @@ const commentatorsNames = [
   'Sveta78'
 ];
 
+const photoDescriptions = [
+  'Котики на крыше',
+  'Я РАБОТАЮЮЮ',
+  'Productive girl :)',
+  'Картина Солнечный кот. Продаю за 50000$(почти бесплатно)',
+  'Купила цветочки',
+  'Круто ем крутой хот-дог !!!',
+  'Мле',
+  'Попросил подравнять кончики',
+  'Хочеш китика?',
+  'Арбуз-арбуз, привет',
+  'Лежу.балдежу',
+  'Дедлайны горят? Да и фиг с ними! Мы в отпуске',
+  'Мены...',
+  'I love my job, I love my job, I love my job... ',
+  'Whatever aesthetic',
+  'Пусто',
+  'Девочки, на завод!',
+  'Смотрите чего умею',
+  'Не знаю зачем',
+  'Бывает же такое :0',
+  'Офигенный, современный',
+  'У меня самая лучшая работа!',
+  'Я котек',
+  'Шарик?',
+  'Хоба'
+];
 
 const createIdGenerator = () => {
   let currentId = 0;
@@ -50,12 +77,11 @@ const createComment = () => {
 };
 
 const createPhotoDescription = () => {
-  const createPhotoId = createId();
-  const createLinkId = createId();
+  const id = createId();
   return {
-    id: createPhotoId(),
-    url: `photos/${ createLinkId() }.jpg`,
-    description:'random photo', //array descriptions
+    id: id,
+    url: `photos/${ id }.jpg`,
+    description: photoDescriptions[id - 1],
     likes: getRandomInteger(minLikes, maxLikes),
     comments: Array.from({length: getRandomInteger(0, MAX_COMMENTS)}, createComment)
   };
@@ -63,3 +89,5 @@ const createPhotoDescription = () => {
 
 const generatePhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotoDescription);
 generatePhotos();
+
+export {generatePhotos};

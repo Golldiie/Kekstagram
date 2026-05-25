@@ -1,10 +1,9 @@
 import { getRandomArrayElement, getRandomInteger} from './util.js';
 
 const PHOTOS_COUNT = 25;
-const MAX_COMMENTS = 30;
-const minLikes = 15;
-const maxLikes = 200;
-const avatarCount = 6;
+const commentsMinMax = {min: 0, max:30};
+const likesMinMax = {min: 15, max: 200};
+const avatarMinMax = {min: 1, max: 6};
 
 const comments = [
   'Всё отлично!',
@@ -31,35 +30,61 @@ const commentatorsNames = [
   'Sveta78'
 ];
 
+const photoDescriptions = [
+  'Котики на крыше',
+  'Я РАБОТАЮЮЮ',
+  'Productive girl :)',
+  'Картина Солнечный кот. Продаю за 50000$(почти бесплатно)',
+  'Купила цветочки',
+  'Круто ем крутой хот-дог !!!',
+  'Мле',
+  'Попросил подравнять кончики',
+  'Хочеш китика?',
+  'Арбуз-арбуз, привет',
+  'Лежу.балдежу',
+  'Дедлайны горят? Да и фиг с ними! Мы в отпуске',
+  'Мены...',
+  'I love my job, I love my job, I love my job... ',
+  'Whatever aesthetic',
+  'Пусто',
+  'Девочки, на завод!',
+  'Смотрите чего умею',
+  'Не знаю зачем',
+  'Бывает же такое :0',
+  'Офигенный, современный',
+  'У меня самая лучшая работа!',
+  'Я котек',
+  'Шарик?',
+  'Хоба'
+];
 
 const createIdGenerator = () => {
   let currentId = 0;
   return () => ++currentId;
 };
 
-const createId = createIdGenerator();
+const createPhotoId = createIdGenerator();
+const createCommentId = createIdGenerator();
 
-const createComment = () => {
-  const createCommentId = createId();
-  return {
-    id: createCommentId(),
-    avatar: `img/avatar-${ getRandomInteger(1, avatarCount) }.svg`,
-    message: getRandomArrayElement(comments),
-    name: getRandomArrayElement(commentatorsNames)
-  };
-};
+const createComment = () => ({
+  id: createCommentId(),
+  avatar: `img/avatar-${ getRandomInteger(avatarMinMax.min, avatarMinMax.max) }.svg`,
+  message: getRandomArrayElement(comments),
+  name: getRandomArrayElement(commentatorsNames)
+});
 
 const createPhotoDescription = () => {
-  const createPhotoId = createId();
-  const createLinkId = createId();
+  const id = createPhotoId();
   return {
-    id: createPhotoId(),
-    url: `photos/${ createLinkId() }.jpg`,
-    description:'random photo', //array descriptions
-    likes: getRandomInteger(minLikes, maxLikes),
-    comments: Array.from({length: getRandomInteger(0, MAX_COMMENTS)}, createComment)
+    id: id,
+    url: `photos/${ id }.jpg`,
+    description: photoDescriptions[id - 1],
+    likes: getRandomInteger(likesMinMax.min, likesMinMax.max),
+    comments: Array.from({length: getRandomInteger(commentsMinMax.min, commentsMinMax.max)}, createComment)
   };
 };
 
 const generatePhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotoDescription);
-generatePhotos();
+
+
+export {generatePhotos};

@@ -63,20 +63,18 @@ const createIdGenerator = () => {
   return () => ++currentId;
 };
 
-const createId = createIdGenerator();
+const createPhotoId = createIdGenerator();
+const createCommentId = createIdGenerator();
 
-const createComment = () => {
-  const createCommentId = createId();
-  return {
-    id: createCommentId(),
-    avatar: `img/avatar-${ getRandomInteger(avatarMinMax.min, avatarMinMax.max) }.svg`,
-    message: getRandomArrayElement(comments),
-    name: getRandomArrayElement(commentatorsNames)
-  };
-};
+const createComment = () => ({
+  id: createCommentId(),
+  avatar: `img/avatar-${ getRandomInteger(avatarMinMax.min, avatarMinMax.max) }.svg`,
+  message: getRandomArrayElement(comments),
+  name: getRandomArrayElement(commentatorsNames)
+});
 
 const createPhotoDescription = () => {
-  const id = createId();
+  const id = createPhotoId();
   return {
     id: id,
     url: `photos/${ id }.jpg`,
@@ -87,6 +85,6 @@ const createPhotoDescription = () => {
 };
 
 const generatePhotos = () => Array.from({length: PHOTOS_COUNT}, createPhotoDescription);
-generatePhotos();
+
 
 export {generatePhotos};

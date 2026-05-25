@@ -1,10 +1,9 @@
 import { getRandomArrayElement, getRandomInteger} from './util.js';
 
 const PHOTOS_COUNT = 25;
-const MAX_COMMENTS = 30;
-const minLikes = 15;
-const maxLikes = 200;
-const avatarCount = 6;
+const commentsMinMax = {min: 0, max:30};
+const likesMinMax = {min: 15, max: 200};
+const avatarMinMax = {min: 1, max: 6};
 
 const comments = [
   'Всё отлично!',
@@ -70,7 +69,7 @@ const createComment = () => {
   const createCommentId = createId();
   return {
     id: createCommentId(),
-    avatar: `img/avatar-${ getRandomInteger(1, avatarCount) }.svg`,
+    avatar: `img/avatar-${ getRandomInteger(avatarMinMax.min, avatarMinMax.max) }.svg`,
     message: getRandomArrayElement(comments),
     name: getRandomArrayElement(commentatorsNames)
   };
@@ -82,8 +81,8 @@ const createPhotoDescription = () => {
     id: id,
     url: `photos/${ id }.jpg`,
     description: photoDescriptions[id - 1],
-    likes: getRandomInteger(minLikes, maxLikes),
-    comments: Array.from({length: getRandomInteger(0, MAX_COMMENTS)}, createComment)
+    likes: getRandomInteger(likesMinMax.min, likesMinMax.max),
+    comments: Array.from({length: getRandomInteger(commentsMinMax.min, commentsMinMax.max)}, createComment)
   };
 };
 

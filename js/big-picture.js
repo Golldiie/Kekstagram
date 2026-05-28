@@ -1,3 +1,4 @@
+import { createElementClass } from './util';
 const bigPicture = document.querySelector('.big-picture');
 const closeBigPictureButton = document.querySelector('.big-picture__cancel');
 const commentsList = document.querySelector('.social__comments');
@@ -5,16 +6,13 @@ const commentsList = document.querySelector('.social__comments');
 const renderComments = function(comments){
   commentsList.innerHTML = '';
   comments.forEach((comment) => {
-    const commentElement = document.createElement('li');
-    commentElement.classList.add('social__comment');
-    const avatar = document.createElement('img');
-    avatar.classList.add('social__picture');
+    const commentElement = createElementClass('li', 'social__comment');
+    const avatar = createElementClass('img', 'social__picture');
     avatar.width = 35;
     avatar.height = 35;
     avatar.src = comment.avatar;
     avatar.alt = comment.name;
-    const text = document.createElement('p');
-    text.classList.add('social__text');
+    const text = document.createElementClass('p', 'social__text');
     text.textContent = comment.message;
     commentElement.append(avatar, text);
     commentsList.appendChild(commentElement);

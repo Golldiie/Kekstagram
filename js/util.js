@@ -7,9 +7,10 @@ const getRandomInteger = (a,b) => {
 
 const getRandomArrayElement = (elements) => elements[getRandomInteger(0, elements.length - 1)];
 
-const createElementClass = (parent, tagName, className) =>{
-  const element = parent.createElement(tagName);
+const createElementClass = (tagName, className) =>{
+  const element = document.createElement(tagName);
   element.classList.add(className);
+  return element;
 };
 
 export {getRandomArrayElement, getRandomInteger, createElementClass};

@@ -1,4 +1,6 @@
 const imageUploadForm = document.querySelector('.img-upload__form');
+const hashtagInput = imageUploadForm.querySelector('#hashtags');
+const descriptionInput = imageUploadForm.querySelector('#description');
 
 const pristine = new Pristine(imageUploadForm,{
   classTo: 'img-upload__field-wrapper',
@@ -30,7 +32,7 @@ const validateHashtags = function(value){
 };
 
 pristine.addValidator(
-  imageUploadForm.querySelector('#hashtags'),
+  hashtagInput,
   validateHashtags,
   'от 1 до 20 буковок (без спецсимволов, пробелов, эмодзи)'
 );
@@ -40,10 +42,19 @@ const validateDescription = function(value){
 };
 
 pristine.addValidator(
-  imageUploadForm.querySelector('#description'),
+  descriptionInput,
   validateDescription,
   'до 140 буковок!'
 );
+
+const stopEscPropagation = function(evt){
+  if(evt.key === 'Escape'){
+    evt.stopPropagation();
+  }
+};
+
+hashtagInput.addEventListener('keydown', stopEscPropagation);
+descriptionInput.addEventListener('keydown', stopEscPropagation);
 
 imageUploadForm.addEventListener('submit',(evt)=>{
   evt.preventDefault();

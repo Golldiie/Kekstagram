@@ -1,5 +1,5 @@
 const imageUploadForm = document.querySelector('.img-upload__form');
-const sendFormButton = document.querySelector('.img-upload__submit');
+
 const pristine = new Pristine(imageUploadForm,{
   classTo: 'img-upload__field-wrapper',
   errorClass: 'img-upload__field-wrapper--invalid',
@@ -8,8 +8,6 @@ const pristine = new Pristine(imageUploadForm,{
   errorTextTag: 'span',
   errorTextClass: 'img-upload__error-text'
 });
-
-pristine.addValidator(imageUploadForm.querySelector('#hashtags'));
 
 const validateHashtags = function(value){
   const tags = value.trim().split(/\s+/).filter(Boolean);
@@ -30,6 +28,22 @@ const validateHashtags = function(value){
   }
   return true;
 };
+
+pristine.addValidator(
+  imageUploadForm.querySelector('#hashtags'),
+  validateHashtags,
+  'от 1 до 20 буковок (без спецсимволов, пробелов, эмодзи)'
+);
+
+const validateDescription = function(value){
+  return value.length <= 140;
+};
+
+pristine.addValidator(
+  imageUploadForm.querySelector('#description'),
+  validateDescription,
+  'до 140 буковок!'
+);
 
 imageUploadForm.addEventListener('submit',(evt)=>{
   evt.preventDefault();

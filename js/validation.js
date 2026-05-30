@@ -1,6 +1,8 @@
 const imageUploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = imageUploadForm.querySelector('#hashtags');
 const descriptionInput = imageUploadForm.querySelector('#description');
+let hashtagErrorMessage = '';
+let descriptionErrorMessage = '';
 
 const pristine = new Pristine(imageUploadForm,{
   classTo: 'img-upload__field-wrapper',
@@ -12,21 +14,36 @@ const pristine = new Pristine(imageUploadForm,{
 });
 
 const validateHashtags = function(value){
-  const tags = value.trim().split(/\s+/).filter(Boolean);
+  const tags = value.trim().toLowerCase().split(/\s+/).filter(Boolean);
+
+  if (!value.trim()) {
+    return true;
+  }
 
   if(tags.length > 5){
+    hashtagErrorMessage = 'Нельзя больше 5 хэштегов';
     return false;
   }
   const hashtag = /^#[a-zф-яё0-9]{1,19}$/i;
 
   for(let i = 0; i < tags.length; i++){
     if(!hashtag.test(tags[i])){
+      hashtagErrorMessage = 'Мне такие символы не нравятся!';
       return false;
     }
 
     if(tags.indexOf(tags[i]) !== i){
+      hashtagErrorMessage = 'А где уникальность?';
       return false;
     }
+  }
+  return true;
+};
+
+const validateDescription = function(value){
+  if(value.length > 140){
+    descriptionErrorMessage = 'Мяу...Давай короче';
+    return false;
   }
   return true;
 };
@@ -34,17 +51,13 @@ const validateHashtags = function(value){
 pristine.addValidator(
   hashtagInput,
   validateHashtags,
-  'от 1 до 20 буковок (без спецсимволов, пробелов, эмодзи)'
+  () => hashtagErrorMessage
 );
-
-const validateDescription = function(value){
-  return value.length <= 140;
-};
 
 pristine.addValidator(
   descriptionInput,
   validateDescription,
-  'до 140 буковок!'
+  () => descriptionErrorMessage
 );
 
 const stopEscPropagation = function(evt){
@@ -57,6 +70,9 @@ hashtagInput.addEventListener('keydown', stopEscPropagation);
 descriptionInput.addEventListener('keydown', stopEscPropagation);
 
 imageUploadForm.addEventListener('submit',(evt)=>{
-  evt.preventDefault();
-  pristine.validate();
+  const isValid = pristine.validate();
+
+  if (!isValid) {
+    evt.preventDefault();
+  }
 });

@@ -43,3 +43,5 @@ closeUploadButton.addEventListener('click', () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 });
 
+export { openUploadModal };
+

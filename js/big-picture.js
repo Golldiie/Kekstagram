@@ -1,4 +1,4 @@
-import { createElementClass } from './util';
+import { createElementClass } from './util.js';
 const bigPicture = document.querySelector('.big-picture');
 const closeBigPictureButton = document.querySelector('.big-picture__cancel');
 

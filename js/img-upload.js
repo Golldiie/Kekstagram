@@ -1,4 +1,4 @@
-import { updateScale } from './change-image';
+import { updateScale } from './change-scale';
 const imageUploadInput = document.querySelector('#upload-file');
 const imageUploadModal = document.querySelector('.img-upload__overlay');
 const closeUploadButton = document.querySelector('.img-upload__cancel');

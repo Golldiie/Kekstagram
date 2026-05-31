@@ -6,3 +6,4 @@ import './gallery.js';
 import './img-upload.js';
 import './form-validation.js';
 import './change-scale.js';
+import './effects-slider.js';

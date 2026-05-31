@@ -1,4 +1,6 @@
-import { updateScale } from './change-scale';
+import { updateScale, } from './change-scale';
+import { resetFilters, resetScaleButtons } from './effects-slider';
+
 const imageUploadInput = document.querySelector('#upload-file');
 const imageUploadModal = document.querySelector('.img-upload__overlay');
 const closeUploadButton = document.querySelector('.img-upload__cancel');
@@ -40,7 +42,8 @@ document.addEventListener('keydown', onDocumentKeydown);
 
 closeUploadButton.addEventListener('click', () => {
   closeUploadModal();
-
+  resetScaleButtons();
+  resetFilters();
   document.removeEventListener('keydown', onDocumentKeydown);
 });
 

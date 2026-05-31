@@ -686,7 +686,6 @@ main {
   width: 450px;
 
   margin: 0 auto;
-  margin-bottom: 20px;
   padding: 5px 10px;
 
   font-family: "Open Sans", "Arial", sans-serif;
@@ -1308,10 +1307,13 @@ main {
 }
 
 /*ошибка в хэштеге/описании*/
+.img-upload__field-wrapper--valid{
+  margin-bottom: 20px;
+}
 
 .img-upload__error-text {
   display: block;
-  margin: 0;
+  margin: 10px 0;
   color: red;
   font-family: 'Open Sans', sans-serif;
   font-weight: 700;

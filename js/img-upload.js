@@ -1,3 +1,4 @@
+import { updateScale } from './change-scale';
 const imageUploadInput = document.querySelector('#upload-file');
 const imageUploadModal = document.querySelector('.img-upload__overlay');
 const closeUploadButton = document.querySelector('.img-upload__cancel');
@@ -14,7 +15,7 @@ const openUploadModal = function(){
   const imageUrl = URL.createObjectURL(file);
 
   imagePreview.src = imageUrl;
-
+  updateScale(100);
   effectsPreviews.forEach((effectPreview) => {
     effectPreview.style.backgroundImage = `url(${imageUrl})`;
   });
@@ -42,4 +43,6 @@ closeUploadButton.addEventListener('click', () => {
 
   document.removeEventListener('keydown', onDocumentKeydown);
 });
+
+export { openUploadModal };
 

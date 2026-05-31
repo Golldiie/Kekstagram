@@ -4,4 +4,6 @@ import './thumbnails.js';
 import './big-picture.js';
 import './gallery.js';
 import './img-upload.js';
-import './validation.js';
+import './form-validation.js';
+import './change-scale.js';
+import './effects-slider.js';

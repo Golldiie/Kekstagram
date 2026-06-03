@@ -1,5 +1,5 @@
-import { updateScale, } from './change-scale';
-import { resetFilters, resetScaleButtons } from './effects-slider';
+import { updateScale, resetScaleButtons } from './change-scale';
+import { resetFilters } from './effects-slider';
 
 const imageUploadInput = document.querySelector('#upload-file');
 const imageUploadModal = document.querySelector('.img-upload__overlay');

@@ -1,6 +1,7 @@
 const imageUploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = imageUploadForm.querySelector('#hashtags');
 const descriptionInput = imageUploadForm.querySelector('#description');
+
 let hashtagErrorMessage = '';
 let descriptionErrorMessage = '';
 
@@ -69,10 +70,27 @@ const stopEscPropagation = function(evt){
 hashtagInput.addEventListener('keydown', stopEscPropagation);
 descriptionInput.addEventListener('keydown', stopEscPropagation);
 
-imageUploadForm.addEventListener('submit',(evt)=>{
-  const isValid = pristine.validate();
-
-  if (!isValid) {
+const setUserFormSubmit = (onSuccess) => {
+  imageUploadForm.addEventListener('submit',(evt)=>{
     evt.preventDefault();
-  }
-});
+
+    const isValid = pristine.validate();
+
+    if (isValid) {
+      const formData = new FormData(evt.target);
+
+      fetch('https://32.javascript.htmlacademy.pro/kekstagram',
+        {
+          method: 'POST',
+          body: formData,
+        },
+      ).then(onSuccess)
+        .catch((err) => {
+
+        });
+    }
+  });
+};
+
+export { setUserFormSubmit };
+

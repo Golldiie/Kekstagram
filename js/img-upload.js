@@ -27,6 +27,7 @@ const closeUploadModal = function(){
   document.body.classList.remove('modal-open');
   imageUploadModal.classList.add('hidden');
   imageUploadInput.innerHTML = '';
+  imagePreview.src = '';
 };
 
 imageUploadInput.addEventListener('change', openUploadModal);
@@ -47,5 +48,5 @@ closeUploadButton.addEventListener('click', () => {
   document.removeEventListener('keydown', onDocumentKeydown);
 });
 
-export { openUploadModal };
+export { openUploadModal, closeUploadModal };
 

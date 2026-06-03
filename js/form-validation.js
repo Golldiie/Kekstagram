@@ -1,3 +1,5 @@
+import { showMessage } from './message';
+
 const imageUploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = imageUploadForm.querySelector('#hashtags');
 const descriptionInput = imageUploadForm.querySelector('#description');
@@ -84,9 +86,18 @@ const setUserFormSubmit = (onSuccess) => {
           method: 'POST',
           body: formData,
         },
-      ).then(onSuccess)
-        .catch((err) => {
-
+      )
+        .then((response)=>{
+          if (response.ok) {
+            onSuccess();
+            showMessage('success');
+            imageUploadForm.reset();
+          } else {
+            showMessage('error');
+          }
+        })
+        .catch(()=>{
+          showMessage('error');
         });
     }
   });

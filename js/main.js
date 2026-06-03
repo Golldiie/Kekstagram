@@ -6,3 +6,4 @@ import './form-validation.js';
 import './change-scale.js';
 import './effects-slider.js';
 import './api.js';
+import './message.js';

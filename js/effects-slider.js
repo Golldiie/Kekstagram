@@ -79,32 +79,40 @@ effectSlider.noUiSlider.on('update', () => {
   previewImage.style.filter = `${settings.filter}(${value}${settings.unit})`;
 });
 
+const changeSliderHandler = function(evt){
+  currentEffect = evt.target.value;
+
+  if(currentEffect === 'none'){
+    sliderContainer.style.display = 'none';
+    previewImage.style.filter = '';
+    effectValue.value = 100;
+    return;
+  }
+  const settings = sliderSettings[currentEffect];
+
+  sliderContainer.style.display = '';
+  effectSlider.noUiSlider.updateOptions({
+    range:{
+      min: settings.min,
+      max: settings.max
+    },
+    step: settings.step,
+    start: settings.start
+  });
+
+  effectSlider.noUiSlider.set(settings.start);
+  previewImage.style.filter = `${settings.filter}(${settings.start}${settings.unit})`;
+};
 
 for(const effect of effects){
-  effect.addEventListener('change', (evt) =>{
-    currentEffect = evt.target.value;
-
-    if(currentEffect === 'none'){
-      sliderContainer.style.display = 'none';
-      previewImage.style.filter = '';
-      effectValue.value = 100;
-      return;
-    }
-    const settings = sliderSettings[currentEffect];
-
-    sliderContainer.style.display = '';
-    effectSlider.noUiSlider.updateOptions({
-      range:{
-        min: settings.min,
-        max: settings.max
-      },
-      step: settings.step,
-      start: settings.start
-    });
-
-    effectSlider.noUiSlider.set(settings.start);
-    previewImage.style.filter = `${settings.filter}(${settings.start}${settings.unit})`;
-  });
+  effect.addEventListener('change', changeSliderHandler);
 }
+
+const resetFilters = function(){
+  effects.removeEventListener('change', changeSliderHandler);
+  effectSlider.noUiSlider.destroy();
+};
+
+export { changeSliderHandler, resetFilters };
 
 

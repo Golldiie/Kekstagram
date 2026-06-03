@@ -3,23 +3,23 @@ const pictureTemplate = document.querySelector('#picture').content.querySelector
 
 
 const renderPictures = (photos, onPictureClick) => {
-  const randomPictureFragment = document.createDocumentFragment();
-  photos.forEach((randomPhoto) => {
-    const randomPicture = pictureTemplate.cloneNode(true);
-    randomPicture.dataset.photoId = randomPhoto.id;
-    randomPicture.querySelector('.picture__img').src = randomPhoto.url;
-    randomPicture.querySelector('.picture__img').alt = randomPhoto.description;
-    randomPicture.querySelector('.picture__likes').textContent = randomPhoto.likes;
-    randomPicture.querySelector('.picture__comments').textContent = randomPhoto.comments.length;
+  const photosListFragment = document.createDocumentFragment();
+  photos.forEach((photo) => {
+    const photoElement = pictureTemplate.cloneNode(true);
+    photoElement.dataset.photoId = photo.id;
+    photoElement.querySelector('.picture__img').src = photo.url;
+    photoElement.querySelector('.picture__img').alt = photo.description;
+    photoElement.querySelector('.picture__likes').textContent = photo.likes;
+    photoElement.querySelector('.picture__comments').textContent = photo.comments.length;
 
-    randomPicture.addEventListener('click', () =>{
-      onPictureClick(randomPhoto);
+    photoElement.addEventListener('click', () =>{
+      onPictureClick(photo);
     });
 
-    randomPictureFragment.appendChild(randomPicture);
+    photosListFragment.appendChild(photoElement);
   });
 
-  picturesContainer.appendChild(randomPictureFragment);
+  picturesContainer.appendChild(photosListFragment);
 };
 
 export { renderPictures };

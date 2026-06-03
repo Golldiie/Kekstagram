@@ -32,5 +32,10 @@ const makeSizeBigger = function(){
 scaleLowerButton.addEventListener('click', makeSizeSmaller);
 scaleUpperButton.addEventListener('click', makeSizeBigger);
 
+const resetScaleButtons = function(){
+  scaleLowerButton.removeEventListener('click', makeSizeSmaller);
+  scaleUpperButton.removeEventListener('click', makeSizeBigger);
+};
 
-export { updateScale };
+
+export { updateScale, resetScaleButtons };

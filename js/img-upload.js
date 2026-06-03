@@ -1,8 +1,10 @@
-import { updateScale } from './change-scale';
+import { updateScale, resetScaleButtons } from './change-scale';
+import { resetFilters } from './effects-slider';
+
 const imageUploadInput = document.querySelector('#upload-file');
 const imageUploadModal = document.querySelector('.img-upload__overlay');
 const closeUploadButton = document.querySelector('.img-upload__cancel');
-
+const imageUploadForm = document.querySelector('.img-upload__form');
 const imagePreview = document.querySelector('.img-upload__preview img');
 const effectsPreviews = document.querySelectorAll('.effects__preview');
 
@@ -25,6 +27,8 @@ const closeUploadModal = function(){
   document.body.classList.remove('modal-open');
   imageUploadModal.classList.add('hidden');
   imageUploadInput.innerHTML = '';
+  imagePreview.src = '';
+  imageUploadForm.reset();
 };
 
 imageUploadInput.addEventListener('change', openUploadModal);
@@ -40,9 +44,10 @@ document.addEventListener('keydown', onDocumentKeydown);
 
 closeUploadButton.addEventListener('click', () => {
   closeUploadModal();
-
+  resetScaleButtons();
+  resetFilters();
   document.removeEventListener('keydown', onDocumentKeydown);
 });
 
-export { openUploadModal };
+export { openUploadModal, closeUploadModal };
 

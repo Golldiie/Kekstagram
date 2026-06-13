@@ -13,7 +13,7 @@ const createElementClass = (tagName, className) =>{
   return element;
 };
 
-const debounceRender = function(cb, timeoutDelay){
+const debounce = function(cb, timeoutDelay){
   let timeoutId;
 
   return (...rest) => {
@@ -22,4 +22,4 @@ const debounceRender = function(cb, timeoutDelay){
   };
 };
 
-export {getRandomArrayElement, getRandomInteger, createElementClass, debounceRender };
+export {getRandomArrayElement, getRandomInteger, createElementClass, debounce };

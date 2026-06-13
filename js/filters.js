@@ -1,4 +1,6 @@
-import { renderPictures } from './thumbnails';
+import { openBigPicture } from './big-picture';
+import { renderPictures, clearPictures } from './thumbnails';
+import { getRandomArrayElement } from './util';
 
 const filtersSection = document.querySelector('.img-filters');
 
@@ -12,20 +14,31 @@ const showFilters = function(){
 };
 
 
-const initPhotos = function(photos){
+const initFilters = function(photos){
   filterDefaultButton.addEventListener('click', () => {
-    renderPictures(photos);
+    clearPictures();
+    renderPictures(photos, openBigPicture);
   });
 
   filterRandomButton.addEventListener('click', () => {
-    const randomPhotos = photos.slice();
-    randomPhotos.slice(0, 10);
-    renderPictures(randomPhotos);
+    const random = new Set();
+
+    while (random.size < 10) {
+      random.add(getRandomArrayElement(photos));
+    }
+
+    clearPictures();
+    renderPictures([...random], openBigPicture);
   });
 
   filterDiscussedButton.addEventListener('click', () => {
+    const discussed = photos
+      .slice()
+      .sort((photoA, photoB) => photoB.comments.length - photoA.comments.length);
 
+    clearPictures();
+    renderPictures(discussed, openBigPicture);
   });
 };
 
-export { showFilters, initPhotos };
+export { showFilters, initFilters };

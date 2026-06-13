@@ -1,6 +1,6 @@
 import { openBigPicture } from './big-picture';
 import { renderPictures, clearPictures } from './thumbnails';
-import { getRandomArrayElement } from './util';
+import { getRandomArrayElement, debounceRender } from './util';
 
 const filtersSection = document.querySelector('.img-filters');
 
@@ -8,6 +8,7 @@ const filterDefaultButton = document.querySelector('#filter-default');
 const filterRandomButton = document.querySelector('#filter-random');
 const filterDiscussedButton = document.querySelector('#filter-discussed');
 
+const TIMOUT_DELAY = 500;
 
 const showFilters = function(){
   filtersSection.classList.remove('img-filters--inactive');
@@ -17,7 +18,7 @@ const showFilters = function(){
 const initFilters = function(photos){
   filterDefaultButton.addEventListener('click', () => {
     clearPictures();
-    renderPictures(photos, openBigPicture);
+    debounceRender(renderPictures(photos, openBigPicture), TIMOUT_DELAY);
   });
 
   filterRandomButton.addEventListener('click', () => {
@@ -28,7 +29,7 @@ const initFilters = function(photos){
     }
 
     clearPictures();
-    renderPictures([...random], openBigPicture);
+    debounceRender(renderPictures([...random], openBigPicture), TIMOUT_DELAY);
   });
 
   filterDiscussedButton.addEventListener('click', () => {
@@ -37,7 +38,7 @@ const initFilters = function(photos){
       .sort((photoA, photoB) => photoB.comments.length - photoA.comments.length);
 
     clearPictures();
-    renderPictures(discussed, openBigPicture);
+    debounceRender(renderPictures(discussed, openBigPicture), TIMOUT_DELAY);
   });
 };
 

@@ -6,20 +6,23 @@ import { showError } from './message';
 
 const DATA_ERROR_SHOW_TIME = 5000;
 
-fetch('https://32.javascript.htmlacademy.pro/kekstagram/data')
-  .then((response) => {
-    if (!response.ok) {
+
+const getPhotos = async() => {
+  try{
+    const response = await fetch('https://32.javascript.htmlacademy.pro/kekstagram/data');
+
+    if(!response.ok){
       throw new Error(`HTTP error: ${response.status}`);
     }
 
-    return response.json();
-  })
-  .then((thumbnails) => {
+    const thumbnails = await response.json();
     renderPictures(thumbnails, openBigPicture);
-  })
-  .catch(() => {
-    showError('data-error', DATA_ERROR_SHOW_TIME);
-  });
+  } catch {
+    showError('data error', DATA_ERROR_SHOW_TIME);
+  }
+};
+
+getPhotos();
 
 setUserFormSubmit(closeUploadModal);
 

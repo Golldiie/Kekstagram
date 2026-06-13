@@ -73,32 +73,36 @@ hashtagInput.addEventListener('keydown', stopEscPropagation);
 descriptionInput.addEventListener('keydown', stopEscPropagation);
 
 const setUserFormSubmit = (onSuccess) => {
-  imageUploadForm.addEventListener('submit',(evt)=>{
+  imageUploadForm.addEventListener('submit', async (evt) => {
     evt.preventDefault();
 
     const isValid = pristine.validate();
 
-    if (isValid) {
-      const formData = new FormData(evt.target);
+    if (!isValid) {
+      return;
+    }
 
-      fetch('https://32.javascript.htmlacademy.pro/kekstagram',
+    const formData = new FormData(evt.target);
+
+    try {
+      const response = await fetch(
+        'https://32.javascript.htmlacademy.pro/kekstagram',
         {
           method: 'POST',
           body: formData,
-        },
-      )
-        .then((response)=>{
-          if (response.ok) {
-            onSuccess();
-            showMessage('success');
-            imageUploadForm.reset();
-          } else {
-            showMessage('error');
-          }
-        })
-        .catch(()=>{
-          showMessage('error');
-        });
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error(`HTTP error: ${response.status}`);
+      }
+
+      onSuccess();
+      showMessage('success');
+      imageUploadForm.reset();
+
+    } catch {
+      showMessage('error');
     }
   });
 };

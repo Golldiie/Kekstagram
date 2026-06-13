@@ -1,5 +1,3 @@
-import { renderPictures } from './thumbnails';
-import { openBigPicture } from './big-picture';
 import { closeUploadModal } from './img-upload';
 import { setUserFormSubmit } from './form-validation';
 import { showError } from './message';
@@ -14,15 +12,13 @@ const getPhotos = async() => {
     if(!response.ok){
       throw new Error(`HTTP error: ${response.status}`);
     }
-
-    const thumbnails = await response.json();
-    renderPictures(thumbnails, openBigPicture);
+    return await response.json();
   } catch {
     showError('data error', DATA_ERROR_SHOW_TIME);
   }
 };
 
-getPhotos();
-
 setUserFormSubmit(closeUploadModal);
+
+export { getPhotos };
 

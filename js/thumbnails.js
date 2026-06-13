@@ -22,5 +22,11 @@ const renderPictures = (photos, onPictureClick) => {
   picturesContainer.appendChild(photosListFragment);
 };
 
-export { renderPictures };
+const clearPictures = () => {
+  const pictures = document.querySelectorAll('.picture');
+
+  pictures.forEach((picture) => picture.remove());
+};
+
+export { renderPictures, clearPictures };
 

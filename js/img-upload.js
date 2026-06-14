@@ -19,9 +19,13 @@ const openUploadModal = function(){
   const fileName = file.name.toLowerCase();
   const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
-  if(matches){
-    imagePreview.src = URL.createObjectURL(file);
+  if (!matches) {
+    return;
   }
+
+  const imageUrl = URL.createObjectURL(file);
+
+  imagePreview.src = imageUrl;
 
   updateScale(100);
   effectsPreviews.forEach((effectPreview) => {

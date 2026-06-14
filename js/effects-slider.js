@@ -109,8 +109,17 @@ for(const effect of effects){
 }
 
 const resetFilters = function(){
-  effects.removeEventListener('change', changeSliderHandler);
-  effectSlider.noUiSlider.destroy();
+  currentEffect = 'none';
+
+  sliderContainer.style.display = 'none';
+
+  previewImage.style.filter = '';
+
+  effectValue.value = 100;
+
+  effectSlider.noUiSlider.set(100);
+
+  document.querySelector('#effect-none').checked = true;
 };
 
 export { changeSliderHandler, resetFilters };

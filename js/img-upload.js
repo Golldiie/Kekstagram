@@ -36,9 +36,9 @@ const openUploadModal = function(){
 const closeUploadModal = function(){
   document.body.classList.remove('modal-open');
   imageUploadModal.classList.add('hidden');
-  imageUploadInput.innerHTML = '';
-  imagePreview.src = '';
   imageUploadForm.reset();
+  imagePreview.style.filter = '';
+  imagePreview.style.transform = 'scale(1)';
 };
 
 imageUploadInput.addEventListener('change', openUploadModal);

@@ -1,6 +1,8 @@
 import { updateScale, resetScaleButtons } from './change-scale';
 import { resetFilters } from './effects-slider';
 
+const FILE_TYPES = ['jpg', 'jpeg', 'png'];
+
 const imageUploadInput = document.querySelector('#upload-file');
 const imageUploadModal = document.querySelector('.img-upload__overlay');
 const closeUploadButton = document.querySelector('.img-upload__cancel');
@@ -14,9 +16,13 @@ const openUploadModal = function(){
 
   const file = imageUploadInput.files[0];
 
-  const imageUrl = URL.createObjectURL(file);
+  const fileName = file.name.toLowerCase();
+  const matches = FILE_TYPES.some((it) => fileName.endsWith(it));
 
-  imagePreview.src = imageUrl;
+  if(matches){
+    imagePreview.src = URL.createObjectURL(file);
+  }
+
   updateScale(100);
   effectsPreviews.forEach((effectPreview) => {
     effectPreview.style.backgroundImage = `url(${imageUrl})`;

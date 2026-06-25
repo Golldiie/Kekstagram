@@ -1,4 +1,4 @@
-import { showMessage } from './message';
+import { showMessage } from './message.js';
 
 const imageUploadForm = document.querySelector('.img-upload__form');
 const hashtagInput = imageUploadForm.querySelector('#hashtags');

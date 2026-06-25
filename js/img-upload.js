@@ -1,5 +1,5 @@
-import { updateScale, resetScaleButtons } from './change-scale';
-import { resetFilters } from './effects-slider';
+import { updateScale, resetScaleButtons } from './change-scale.js';
+import { resetFilters } from './effects-slider.js';
 
 const FILE_TYPES = ['jpg', 'jpeg', 'png'];
 

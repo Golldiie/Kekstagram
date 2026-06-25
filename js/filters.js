@@ -1,6 +1,6 @@
-import { openBigPicture } from './big-picture';
-import { renderPictures, clearPictures } from './thumbnails';
-import { getRandomArrayElement, debounce } from './util';
+import { openBigPicture } from './big-picture.js';
+import { renderPictures, clearPictures } from './thumbnails.js';
+import { getRandomArrayElement, debounce } from './util.js';
 
 const filtersSection = document.querySelector('.img-filters');
 const filtersForm = filtersSection.querySelector('.img-filters__form');

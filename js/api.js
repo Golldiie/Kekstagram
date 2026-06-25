@@ -1,6 +1,6 @@
 import { closeUploadModal } from './img-upload.js';
 import { setUserFormSubmit } from './form-validation.js';
-import { showError } from './message';
+import { showError } from './message.js';
 
 const DATA_ERROR_SHOW_TIME = 5000;
 
